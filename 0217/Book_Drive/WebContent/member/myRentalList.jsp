@@ -1,0 +1,175 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" type="text/css"
+	href="bdstyle/style/ko/home/detail.css">
+<c:choose>
+	<c:when test="${userID eq null}">
+		<script>
+			alert('로그인이 필요한 페이지입니다.');
+			location.href="loginForm.log";
+		</script>
+	</c:when>
+	<c:otherwise>
+	
+
+<style>
+.empty {
+	text-align: center;
+}
+</style>
+<div id="divContentsW">
+	<div id="divContents">
+		<div class="searchInfo">
+			<div class="searchHeader">
+				<h3 class="open">대출중인 내역</h3>
+			</div>
+			<!--  if(renFlag== 'brw' -> 'isBrw'='true', if(isBrw=='true')-> select: renFlag:'brw' --> 
+			<div class="searchContents">
+				<div class="listTable">
+					<table class="searchTable default">
+						<c:set var="isBrw" value="false" />
+						<c:forEach items="${rentalList }" var="list" varStatus="status">
+							<c:if test="${list.renFlag eq 'brw' }">
+								<c:set var="isBrw" value="true" />
+							</c:if>
+						</c:forEach>
+						<c:choose> <c:when test="${isBrw eq 'true' }">
+							<c:set var="Num" value="0" />
+								<thead>
+									<tr><th scope="row" data-class="expand"
+											class="footable-first-column">No.</th>
+										<th scope="row" data-hide="phone">자료정보</th>
+										<th scope="row" data-hide="phone">대출일자</th>
+										<th scope="row" data-hide="expand">대출기한</th>
+										<th scope="row" data-hide="expand">상태</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${rentalList }" var="list" varStatus="status">
+										<c:if test="${list.renFlag eq 'brw' and list.renIdvDelFlag eq '0'}">
+											<c:set var="Num" value="${Num+1}" />
+											<tr class="first">
+												<td class="num expand footable-first-column">${status.index+1 }</td>
+												<td class="type">${list.bookName }</td>
+												<td class="renDate">${list.renBrwDate }</td>
+												<td><span class="renBrwInvDAte">
+														${list.renBrwInvDate } </span></td>
+												<td><span class="status">
+													<c:if test="${list.renFlag == 'brw'}">대출중
+													<a href="bookReturn.bk?id=${sessionScope.userID }&index=${sessionScope.userIndex}&bookNum=${list.bookNum}">
+																(반납하기)</a></c:if></span>
+											</tr>
+										</c:if></c:forEach>
+								</tbody>
+							</c:when>
+							<c:otherwise><span class="empty"><h3 class="open"> 대출 내역이 없습니다.</h3> </span></c:otherwise>
+						</c:choose>
+						</tbody>
+					</table>
+				</div></div><br> <br> <br>
+				<!-- rentalList -->
+				
+				
+			<div class="searchHeader">
+				<h3 class="open">예약 내역</h3>
+			</div>
+			<div class="searchContents">
+				<div class="listTable">
+					<table class="searchTable default">
+							<!--  if(renFlag== 'rev' -> 'isRev'='true', if(isRev=='true')-> select: renFlag:'rev' --> 
+						<tbody>
+							<c:set var="isRev" value="false" />
+							<c:forEach items="${rentalList }" var="list" varStatus="status">
+								<c:if test="${list.renFlag eq 'rev' }">
+									<c:set var="isRev" value="true" />
+								</c:if></c:forEach>
+							<c:choose>
+								<c:when test="${isRev eq 'true' }">
+									<c:set var="Num" value="0" />
+									<thead><tr><th scope="row" data-class="expand"
+												class="footable-first-column">No.</th>
+											<th scope="row" data-hide="phone">자료정보</th>
+											<th scope="row" data-hide="phone">예약일자</th>
+											<th scope="row" data-hide="expand">예약만기일</th>
+											<th scope="row" data-hide="expand">도서관</th>
+											<th scope="row" data-hide="expand">예약취소</th>
+										</tr></thead>
+									<c:forEach items="${rentalList }" var="list" varStatus="status">
+										<c:if test="${list.renFlag eq 'rev' and list.renIdvDelFlag eq '0'}">
+											<c:set var="Num" value="${Num+1}" />
+											<tr class="first">
+												<td class="num expand footable-first-column">${Num}</td>
+												<td class="type">${list.bookName }</td>
+												<td class="renDate">${list.renRevDate }</td>
+												<td><span class="renBrwInvDAte">
+														${list.renRevInvDate } </span></td>
+												<td><span class="libCode"> <c:choose>
+															<c:when test="${book.libCode == 'LIB001' }">대구광역시립 중앙도서관</c:when>
+															<c:when test="${book.libCode == 'LIB002' }">대구광역시립 남부도서관</c:when>
+															<c:otherwise>대구광역시립 수성도서관</c:otherwise>
+														</c:choose></span></td>
+												<td class="revCancel"><a href="bookRevCancel.bk?id=${sessionScope.userID }&index=${sessionScope.userIndex}&bookNum=${list.bookNum}">예약취소</a></td>
+											</tr></c:if></c:forEach></c:when>
+								<c:otherwise><span class="empty"><h3 class="open"> 예약 내역이 없습니다.</h3></span> </c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
+				</div>
+				<!--  reservation List -->
+			</div><br> <br> <br>
+			
+			<div class="searchHeader">
+				<h3 class="open">대출 히스토리</h3>
+			</div>
+			
+			<div class="searchContents">
+				<div class="listTable">
+					<table class="searchTable default">
+						<c:set var="isBrw" value="false" />
+						<c:forEach items="${rentalList }" var="list" varStatus="status">
+							<c:if test="${list.renFlag eq 'brw' }">
+								<c:set var="isBrw" value="true" />
+							</c:if>
+						</c:forEach>
+						<c:choose> <c:when test="${isBrw eq 'true' }">
+								<c:set var="Num" value="0" />
+								<thead>
+									<tr><th scope="row" data-class="expand"
+											class="footable-first-column">No.</th>
+										<th scope="row" data-hide="phone">자료정보</th>
+										<th scope="row" data-hide="phone">대출일자</th>
+										<th scope="row" data-hide="expand">반납일자</th>
+										<th scope="row" data-hide="expand">도서관</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${rentalList }" var="list" varStatus="status">
+										<c:if test="${list.renFlag eq 'brw' and list.renIdvDelFlag eq '1'}">
+											<c:set var="Num" value="${Num+1}" />
+											<tr class="first">
+												<td class="num expand footable-first-column">${Num }</td>
+												<td class="type">${list.bookName }</td>
+												<td class="renDate">${list.renBrwDate }</td>
+												<td><span class="renBrwInvDAte">
+														${list.renReturnDate } </span></td>
+												<td><span class="libCode"> <c:choose>
+															<c:when test="${book.libCode == 'LIB001' }">대구광역시립 중앙도서관</c:when>
+															<c:when test="${book.libCode == 'LIB002' }">대구광역시립 남부도서관</c:when>
+															<c:otherwise>대구광역시립 수성도서관</c:otherwise>
+														</c:choose></span></td>
+											</tr>
+										</c:if></c:forEach>
+								</tbody>
+							</c:when>
+							<c:otherwise><span class="empty"><h3 class="open"> 대출 내역이 없습니다.</h3> </span></c:otherwise>
+						</c:choose>
+						</tbody>
+					</table>
+				</div></div>
+		</div>
+	</div>
+</div>
+
+	</c:otherwise>
+</c:choose>
