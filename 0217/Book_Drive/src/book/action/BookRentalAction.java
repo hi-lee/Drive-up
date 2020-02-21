@@ -29,16 +29,16 @@ public class BookRentalAction implements Action {
 		}
 
 		int memIndex = Integer.parseInt(request.getParameter("index"));
-		String id = request.getParameter("id");
 		String libCode = request.getParameter("libCode");
 		String bookNum = request.getParameter("bookNum");
 		String state = request.getParameter("state");
 		String nowPage = request.getParameter("page");
 		String search = request.getParameter("search");
 		String value = request.getParameter("value");
-		
+		System.out.println("bookNum   :" +bookNum + "memIndex   :    " + memIndex +  " libCode  :" + libCode);
 		BookRevSvc bookRevSvc = new BookRevSvc();
 		isModifySuccess = bookRevSvc.insertState(memIndex, bookNum, libCode, state);
+		
 		if (!isModifySuccess) {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();

@@ -65,9 +65,8 @@ public class MemberDAO {
 		// TODO Auto-generated method stub
 		PreparedStatement pstmt = null;
 		int insertCount = 0;
-
 		try {
-			pstmt = con.prepareStatement("insert into member values(0, ?,?,?,?,?,?,?,?,?,?, 1, 0)");
+			pstmt = con.prepareStatement("insert into member values(0, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)");
 			pstmt.setString(1, member.getId());
 			pstmt.setString(2, member.getPassword());
 			pstmt.setString(3, member.getName());
@@ -134,6 +133,30 @@ public class MemberDAO {
 			System.out.println("getMemId err   :" + e);
 		}
 		return memberId;
+	}
+
+	public int getMemInfo(String id, String pw, String receiver) {
+		// TODO Auto-generated method stub
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int updateCount = 0;
+		try {
+			pstmt = con.prepareStatement("select * from member where memId = ? and memEmail = ?");
+			pstmt.setString(1, id);
+			pstmt.setString(2, receiver);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				pstmt = con.prepareStatement("update member set memPass = ? where memId = ? ");
+				pstmt.setString(1, pw);
+				pstmt.setString(2, id);
+				updateCount = pstmt.executeUpdate();
+				
+				if(updateCount>0) commit(con);
+			}
+		} catch (SQLException e) {
+			System.out.println("getMemInfo Err   :  "+e);		}
+		return updateCount;
 	}
 
 }

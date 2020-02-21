@@ -35,15 +35,17 @@ public class MemberJoinProAction implements Action {
 		System.out.println(request.getParameter("userID") + joinResult);
 		
 		if (!joinResult) {
+			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.print("alret('회원 가입에 오류가 발생했습니다. 다시 작성하세요.')");
 			out.println("history.back();");
 			out.println("</script>");
 		} else {
+			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.print("alret('회원가입에 성공했습니다.')");
+			out.print("alret('회원가입에 성공했습니다.');");
 			out.println("</script>");
 			forward = new ActionForward();
 			forward.setPath("loginForm.log");

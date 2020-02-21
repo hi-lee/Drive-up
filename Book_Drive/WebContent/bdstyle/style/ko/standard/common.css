@@ -115,7 +115,7 @@ a.linkBtnStyle:hover span{background:url(../../../../image/ko/solution/common/ic
 .searchOpt1{min-width:90px;height:33px;position:relative;font-size:14px;line-height:13px !important;text-decoration:none;text-align:left;color:#555;vertical-align:middle;background:#fff;display:inline-block;cursor:default;border:1px solid #d1d0cf;padding-right:10px} /* futurenuri */
 .searchOpt1:focus .selectBox-arrow {border-color: #d1d0cf;}
 .searchOpt1 .selectBox-label {height:33px !important;display:inline-block;white-space:nowrap;overflow:hidden;line-height:2.5em;padding-left:10px;padding-right:10px}
-.searchOpt1 .selectBox-arrow {position:absolute;top:0;right:0;width:34px;height:33px;background:url(../../image/ko/solution/common/ico/selectOpt.png) no-repeat 100% 0;}
+.searchOpt1 .selectBox-arrow {position:absolute;top:0;right:0;width:34px;height:33px;background:url(../../../image/ko/solution/common/ico/selectOpt.png) no-repeat 100% 0;}
 .selectBox-dropdown-menu {position:absolute;z-index:99999;max-height:150px;border:1px solid #bbb;background: #fff;overflow:auto;}
 .selectBox-options,
 .selectBox-options li,

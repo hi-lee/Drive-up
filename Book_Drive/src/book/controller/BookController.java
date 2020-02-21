@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.ActionForward;
+import book.action.BookInfoAction;
 import book.action.BookSearchProAction;
 
 /**
@@ -37,8 +38,14 @@ public class BookController extends HttpServlet {
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				System.out.println("bookSearch err ::: " + e);
-				// TODO: handle exception
+				e.printStackTrace();
+			}
+		} else if(command.equals("/bookInfo.bk")) {
+			action = new BookInfoAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 		

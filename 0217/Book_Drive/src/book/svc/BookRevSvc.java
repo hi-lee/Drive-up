@@ -14,9 +14,9 @@ public class BookRevSvc {
 		Connection con = getConnection();
 		BookDAO bookDAO = BookDAO.getInstance();
 		bookDAO.setConnection(con);
-		int updateCount = bookDAO.insertState(memIndex, bookNum, libCode, state);
-		
-		if(updateCount > 0) {
+		int insertCount = bookDAO.insertState(memIndex, bookNum, libCode, state);
+
+		if (insertCount > 0) {
 			commit(con);
 			isModifySuccess = true;
 		} else {

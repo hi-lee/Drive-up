@@ -8,10 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.ActionForward;
+import action.ActionVoid;
+import book.action.BookCartAddAction;
+import book.action.BookCartDelAction;
+import book.action.BookCartListAction;
 import book.action.BookInfoAction;
 import book.action.BookRentalAction;
 import book.action.BookReturnAction;
@@ -32,12 +35,12 @@ public class BookController extends HttpServlet {
 		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(contextPath.length());
 		ActionForward forward = null;
+		ActionVoid actionvoid = null;
 		Action action = null;
 		System.out.println("bkCtroller ::: " + command);
 
 		if (command.equals("/bookSearch.bk")) {
 			forward = new ActionForward();
-
 			request.setAttribute("pageIn", "/book/search.jsp");
 			forward.setPath("template_sub.jsp");
 		} else if (command.equals("/bookSearchPro.bk")) {
@@ -77,6 +80,27 @@ public class BookController extends HttpServlet {
 			}
 		} else if (command.equals("/bookRevCancel.bk")) {
 			action = new BookRevCancelAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/myBookCartAdd.bk")) {
+			actionvoid = new BookCartAddAction();
+			try {
+				actionvoid.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/bookCartList.bk")) {
+			action = new BookCartListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/bookCartDel.bk")) {
+			action = new BookCartDelAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

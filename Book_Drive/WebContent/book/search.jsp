@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel="stylesheet" type="text/css"
-	href="bdstyle/style/ko/home/advanced.css">
+<link rel="stylesheet" type="text/css" href="bdstyle/style/ko/home/advanced.css">
+	<script type="text/javascript" src="bdstyle/script/jquery.selectBox.js"></script>
 
 <script>
 //무슨 기능인지 모르겠음.. 확인이 필요함
@@ -33,8 +33,8 @@ var imgPath = "/image/ko/";
 
 		<div id="divLocation">
 			<ul>
-				<li><a href="https://cham.kiu.ac.kr/" title="HOME"><img
-						src="./소장자료검색_files/home.png" alt="HOME"></a></li>
+				<li><a href="template_main.jsp" title="HOME">
+					<img src="bdstyle/image/ko/local/home.png" alt="HOME"></a></li>
 				<li><a href="https://cham.kiu.ac.kr/search/tot">소장자료검색</a></li>
 				<li><a href="https://cham.kiu.ac.kr/search/tot#">전체</a></li>
 			</ul>
@@ -44,7 +44,7 @@ var imgPath = "/image/ko/";
 
 			<!-- advancedSearch -->
 			<div class="advancedSearch">
-				<form id="search" name="search" method="get">
+				<form id="search" action="bookSearchPro.bk" name="search" method="get">
 					<!-- 디지털컬렉션 파라미터  -->
 					<input type="hidden" name="st" value="KWRD"> <input
 						type="hidden" name="commandType" value="advanced"> <input
@@ -52,22 +52,17 @@ var imgPath = "/image/ko/";
 					<fieldset>
 						<legend>통합검색 </legend>
 						<div class="searchKeyword">
-							<select id="si0" name="si"
+							<select id="si0" name="search"
 								class="searchOpt1 selectSearchItem selectBox"
 								title="검색 항목을 선택하는곳" size="1" style="display: none;">
 								<option value="TOTAL">전체</option>
-								<option value="1" selected="selected">서명</option>
-								<option value="2">저자</option>
-								<option value="3">출판사</option>
-								<option value="4">ISBN</option>
-								<option value="5">서명 or 저자</option>
-							</select> <a href="https://cham.kiu.ac.kr/search/tot#none"
-								class="selectBox searchOpt1 selectSearchItem selectBox-dropdown"
-								title="검색 항목을 선택하는곳" tabindex="NaN"
-								style="width: 148px; display: inline-block;"><span
-								class="selectBox-label" style="width: 104.011px;">서명</span><span
-								class="selectBox-arrow"></span></a> <input type="text" name="q"
-								value="" onfocus="setTextObj(this)"
+								<option value="bookName" selected="selected">서명</option>
+								<option value="bookWriter">저자</option>
+								<option value="bookPub">출판사</option>
+								<option value="ISBN">ISBN</option>
+							<!--  	<option value="5">서명 or 저자</option>	-->							
+							</select> 
+								<input type="text" name="value" value="" onfocus="setTextObj(this)"
 								class="inputTextType1 inputSearchKeyword" title="검색어를 입력하세요">
 
 						</div>
@@ -155,8 +150,8 @@ var imgPath = "/image/ko/";
 			<div class="buttons">
 				<input type="submit" value="검색" title="검색" class="searchBtn">
 				<a href="https://cham.kiu.ac.kr/search/service/searchHistory"
-					title="검색 History">검색 History</a> <input id="resetAll"
-					type="button" value="다시쓰기" title="다시쓰기">
+					title="검색 History">검색 History</a> 
+				<input id="resetAll" type="button" value="다시쓰기" title="다시쓰기">
 			</div>
 			</form>
 		</div>
@@ -169,34 +164,7 @@ $(document).ready(function(){
 	});
 });
 </script>
-	<div id="divQuick" style="top: 194px;">
-		<div class="quickMenu">
-			<h2>QUICK MENU</h2>
-			<ul>
-				<li class="quick1"><a href="https://cham.kiu.ac.kr/myloan/list"
-					title="대출연장">대출연장</a></li>
-				<li class="quick2"><a
-					href="https://cham.kiu.ac.kr/myreserve/list" title="예약조회">예약조회</a></li>
-				<li class="quick3"><a
-					href="https://cham.kiu.ac.kr/purchaserequest/write" title="희망도서">희망도서</a></li>
-				<li class="quick4"><a
-					href="https://cham.kiu.ac.kr/local/html/dds" title="원문복사">원문복사</a></li>
-			</ul>
-		</div>
-		<div class="myMenu">
-			<h2>My Menu</h2>
-			<ul>
-			</ul>
-			<a
-				href="https://cham.kiu.ac.kr/mymenu/insert/101010000?retUrl=/search/tot"
-				class="addMenu" onclick="return confirm(&#39;메뉴추가 하시겠습니까?&#39;);"
-				title="마이메뉴 추가"><img src="./소장자료검색_files/addMenu.png"
-				alt="마이메뉴 추가"></a>
-		</div>
-		<p class="top">
-			<a href="https://cham.kiu.ac.kr/search/tot#">TOP</a>
-		</p>
-	</div>
+	
 </div>
 </div>
 <hr>
@@ -205,7 +173,7 @@ $(document).ready(function(){
 
 
 
-
+<!-- 
 <ul
 	class="selectBox-dropdown-menu selectBox-options searchOpt1-selectBox-dropdown-menu selectSearchItem-selectBox-dropdown-menu"
 	style="display: none;">
@@ -226,7 +194,7 @@ $(document).ready(function(){
 	<li><a rel="3">출판사</a></li>
 	<li><a rel="4">주제어</a></li>
 </ul>
-<!-- 
+
 <ul
 	class="selectBox-dropdown-menu selectBox-options searchOpt1-selectBox-dropdown-menu selectBoolean-selectBox-dropdown-menu"
 	style="display: none;">
@@ -275,5 +243,3 @@ $(document).ready(function(){
 	<li class="selectBox-selected"><a rel="10000">10000</a></li>
 </ul>
  -->
-</body>
-</html>

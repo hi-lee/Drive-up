@@ -102,7 +102,7 @@ function selectEmail(sel) {
 <body>
 	<div id="divContentsW">
 		<div class="login-page">
-			<form class="login-form" name="pwfindform" action="../mailSend" method="post" onsubmit="return chkForm(this)">
+			<form class="login-form" name="pwfindform" action="<%=request.getContextPath() %>/mailSend.mem" method="post" onsubmit="return chkForm(this)">
 				<h3>비밀번호 찾기</h3>
 				<input type="text" id="userID" name="userID" placeholder="아이디" maxlength="20" class="input100"/><br>
 				<input type="text" name="userEmailId" id="userEmailId" size="8" placeholder="이메일"/>&nbsp;@

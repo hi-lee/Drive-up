@@ -10,14 +10,6 @@
 				<li><a href="http://www.fric.kr/user/centerMainView.do?centerId=total" target="_blank" title="새창"><img src="bdstyle/image/ko/local/banner4.jpg" alt="RISS FRIC"><span>FRIC</span></a></li>
 				<li><a href="http://kiu.dcollection.net/jsp/index.jsp" target="_blank" title="새창"><img src="bdstyle/image/ko/local/banner5.jpg" alt="dCollection 학위논문제출"><span>학위논문제출</span></a></li>
 			</ul>
-			<!-- <div class="relatedSite">
-				<a href="#">교내관련사이트</a>
-				<ul>
-					<li><a href="">교내관련사이트1</a></li>
-					<li><a href="">교내관련사이트2</a></li>
-					<li><a href="">교내관련사이트교내관련사이트</a></li>
-				</ul>
-			</div> -->
 		</div>
 	</div>
 	<div class="footer">
@@ -36,9 +28,9 @@
 				<span class="num">1,522,637</span>
 			</li>       
 		</ul>
-		<address>38428 경북 경산시 하양읍 가마실길 50 | TEL 053-600-4651~8 | FAX 053-600-4669</address>
-		<p class="copyright">ⓒ2016 KIU LIBRARY. All rights reserved.</p>
-		<p class="copyrightM">ⓒ2016 KIU LIBRARY. All rights reserved.</p>
+		<address> 대구광역시 동구 신암동 아양로41길 56 | TEL 053-231-2841 </address>
+		<p class="copyright">ⓒ2020 Book-Drive. All rights reserved.</p>
+		<p class="copyrightM">ⓒ2020 Book-Drive. All rights reserved.</p>
 	</div>
 </div>
 <!-- menu_bottom END -->

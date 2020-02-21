@@ -3,7 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" type="text/css" href="bdstyle/style/ko/home/brief.css">
+<link rel="stylesheet" type="text/css" href="bdstyle/style/ko/home/toastr.min.css">
 <script type="text/javascript" src="bdstyle/script/jquery.selectBox.js"></script>
+<script type="text/javascript" src="bdstyle/js/common/toastr.min.js"></script>
+
 <div id="divContentsW">
 	<div id="divContents">
 		<script type="text/javascript"
@@ -173,7 +176,6 @@ var msgBindingButton = "제본정보";
 				<div class="searchWords">
 					<dl class="searchKeyword">
 						<dt>검색어</dt>
-						<!-- <dd>[ 키워드 <span class="division">|</span> <span class="keyword">전체 : 행복 and 저자 : 롤링</span> ]</dd> -->
 						<dd>
 							<span class="keyword">[키워드 / ${search }:${value }]</span>
 						</dd>
@@ -188,7 +190,6 @@ var msgBindingButton = "제본정보";
 
 					<div class="result">
 						<div class="resultHeader">
-							<!-- <p class="searchCnt">총 <span>8,091건</span> 중 <span>500건</span> 출력</p>-->
 							<p class="searchCnt">
 
 								총<strong> ${pageInfo.listCount }</strong>건 출력
@@ -204,6 +205,23 @@ var msgBindingButton = "제본정보";
 
 									</div>
 								</div>
+								<div class="listInfo2">
+						<div class="searchBtns">
+							<ul>
+								<li class="myHistory"><a href="/search/service/searchHistory" title="검색 History"><img src="bdstyle/image/ko/solution/common/btn/searchBtn03.png" alt="검색 History"></a></li>
+								<li class="myCart"><a href="/search/basket/list" title="바구니보기"><img src="bdstyle/image/ko/solution/common/btn/searchBtn04.png" alt="바구니보기"><span class="cnt" id="basket_count">1</span> </a></li>
+							</ul>
+						</div>					
+						<div class="viewOptions">
+							<p class="typeSelect">
+								<a href="javascript:void(0);">
+									<img src="/image/ko/solution/common/ico/calNormalOn.png" alt="목록">
+									
+								<img src="/image/ko/solution/common/ico/calTypeOpen.png" alt="열기"></a>
+							</p>
+							
+						</div>
+					</div>
 
 							</div>
 							<div class="briefHeader sort">
@@ -287,8 +305,8 @@ var msgBindingButton = "제본정보";
 											</dd>
 											<dt class="title">No</dt>
 											<dd class="num">${status.index + ((pageInfo.page-1)*5) + 1 }.</dd>
-	
 											<dt class="title">표지이미지</dt>
+											
 											<dd class="book">
 												<a href="#">
 													<img id="bookImg_CATTOT000000498079"
@@ -298,7 +316,7 @@ var msgBindingButton = "제본정보";
 
 												<p class="selectBtn">
 													<a id="basket_CAT000000498079"
-														href="javascript:toggleBasket(&#39;CAT000000498079&#39;);"
+														href="javascript:addBookCart('${list.bookNum}','${list.libCode}','${sessionScope.userIndex}');"
 														class="cartBtn " title="바구니 담기">바구니 담기</a>
 												</p>
 											</dd>
@@ -412,7 +430,44 @@ var msgBindingButton = "제본정보";
 				</div>
 			</div>
 
-			<script type="text/javascript">
+<script type="text/javascript">
+function addBookCart(bookNum, libCode, userIndex) {
+	$.ajax({
+		url : 'myBookCartAdd.bk',
+		type: 'POST',
+		dataType: 'json',
+		data : {
+			"bookNum" : bookNum,
+			"libCode" : libCode,
+			"userIndex" : userIndex
+		},
+		success: function(data) {
+			console.log('성공');
+			toastr.options = {
+				      "closeButton" : false,
+				      "debug" : false,
+				      "newestOnTop" : false,
+				      "progressBar" : true,
+				      "positionClass" : "toast-bottom-center",
+				      "preventDuplicates" : false,
+				      "onclick" : null,
+				      "showDuration" : "300",
+				      "hideDuration" : "1000",
+				      "timeOut" : "3000",
+				      "extendedTimeOut" : "1000",
+				      "showEasing" : "swing",
+				      "hideEasing" : "linear",
+				      "showMethod" : "fadeIn",
+				      "hideMethod" : "fadeOut"
+				     }
+				     toastr.success("보관함에 추가되었습니다", "보관함"); 
+		},
+		error: function(request, status, error) {
+			console.log('실패');
+			alert('장바구니에 추가가 실패했습니다');
+		}
+	})
+}			
 var IS_USE_OPAC_SEARCH = "false";
 var MSG_ERROR_NOT_FIND = "";
 var MSG_VALID_LOGIN = "로그인 후 이용하세요.";

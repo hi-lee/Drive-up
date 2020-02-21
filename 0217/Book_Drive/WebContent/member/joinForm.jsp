@@ -85,7 +85,7 @@ function chkForm(f){
 		f.userPhone.focus();
 		return false;
 	}
-	if(f.userAddr1.value.length!=5){
+	if(f.userZip.value.length!=5){
 		alert("다섯자리 (신)우편번호를 입력해주세요.");
 		f.userAddr1.focus();
 		return false;
@@ -221,11 +221,11 @@ function selectEmail(sel) {
 		                }
 		
 		                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-		                document.getElementById('userAddr1').value = data.zonecode; //5자리 새우편번호 사용
-		                document.getElementById('userAddr2').value = fullAddr;
+		                document.getElementById('userZip').value = data.zonecode; //5자리 새우편번호 사용
+		                document.getElementById('userAddr1').value = fullAddr;
 		
 		                // 커서를 상세주소 필드로 이동한다.
-		                document.getElementById('userAddr3').focus();
+		                document.getElementById('userAddr2').focus();
 		            }
 		        }).open();
 		    }

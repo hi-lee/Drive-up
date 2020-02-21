@@ -1,7 +1,7 @@
 package mail;
 
 public class randomPw {
-	public static String randomPw (int length) {
+	public static String randomPass (int length) {
 		int index = 0;
 		char[] charSet = new char[] {
 				'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -19,7 +19,7 @@ public class randomPw {
 		return buffer.toString();
 	}
 	public static void main(String[] args) {
-		String passwd = randomPw(10);
+		String passwd = randomPass(10);
 		System.out.println("pw    :" + passwd);
 	}
 }

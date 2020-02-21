@@ -18,6 +18,7 @@ import member.action.MemModProAction;
 import member.action.MemberJoinProAction;
 import member.action.memInfoAction;
 import member.action.myRentalListAction;
+import member.action.pwMailSendAction;
 
 /**
  * Servlet implementation class MemberController
@@ -33,7 +34,7 @@ public class MemberController extends HttpServlet {
 		String command = RequestURI.substring(contextPath.length());
 		ActionForward forward = null;
 		Action action = null;
-		System.out.println("memController command : " + command);
+		System.out.println("memController ::: " + command);
 
 		if (command.equals("/joinForm.mem")) {
 			forward = new ActionForward();
@@ -84,6 +85,13 @@ public class MemberController extends HttpServlet {
 			}
 		} else if (command.equals("/myRentalList.mem")) {
 			action = new myRentalListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/mailSend.mem")) {
+			action = new pwMailSendAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

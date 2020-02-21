@@ -190,7 +190,6 @@
 														<a href="bookRental.bk?page=${param.page }&search=${param.search}&value=${param.value}&id=${sessionScope.userID }&index=${sessionScope.userIndex}&bookNum=${book.bookNum}&libCode=${book.libCode}&state=${book.bookState}">
 															대출하기</a>
 													</c:when>
-										<%--			<c:when test="${rentalIdv.memIndex eq 'sessionScope.index' }"> </c:when> --%>
 														<c:when test="${book.bookState == '1' || book.bookState == '2'}">대출불가 </c:when>
 												</c:choose>
 										</span></td>
@@ -200,12 +199,10 @@
 										<td><c:choose>
 												<c:when test="${book.bookState =='1' }">
 													<a href="bookRev.bk?page=${param.page }&search=${param.search}&value=${param.value}&id=${sessionScope.userID }&index=${sessionScope.userIndex}&bookNum=${book.bookNum}&libCode=${book.libCode}&state=${book.bookState}"
-														 class="reservation available"> 예약가능 </a>
+														 class="reservation available"> 예약가능 </a> <!-- 관외예약 / 관내예약 -->
 												</c:when>
 												<c:when test="${book.bookState == '2' }">예약불가 </c:when>
 											</c:choose></td>
-										</div>
-										</td>
 									</tr>
 								</tbody>
 							</table>
